@@ -1,16 +1,21 @@
 import chainer
-import chainer.functions as F
 
 from chainer import Variable
+from lib.loss_functions.mae_loss import mae_loss
+from lib.loss_functions.mse_loss import mse_loss
+from lib.loss_functions.ssim_loss import ssim_loss
+
+loss_functions = {'mse': mse_loss, 'mae': mae_loss, 'ssim': ssim_loss}
 
 
 class Updater(chainer.training.StandardUpdater):
     def __init__(self, *args, **kwargs):
         self.cae = kwargs.pop('model')
+        self.loss_function = kwargs.pop('loss_function')
         super(Updater, self).__init__(*args, **kwargs)
 
     def loss(self, cae, x, t):
-        loss = F.mean_squared_error(x, t)
+        loss = loss_functions[self.loss_function](x, t)
         chainer.report({'loss': loss}, cae)
         return loss
 

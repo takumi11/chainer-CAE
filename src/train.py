@@ -9,7 +9,7 @@ from util.args import parser
 from util.get_dataset import get_datasets
 from util.environment_log import environment_log
 
-from models.cae import DeepCAE
+from model.cae import DeepCAE
 
 import chainer
 from chainer import training
@@ -66,6 +66,7 @@ def main():
             'main': train_iter,
             'test': test_iter},
         optimizer={'cae': opt_cae},
+        loss_function=args.loss_function,
         device=args.gpu)
 
     trainer = training.Trainer(

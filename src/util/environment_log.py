@@ -17,6 +17,7 @@ def environment_log(args, save_path):
     environment.add('# Minibatch-size: {}'.format(args.batchsize))
     environment.add('# iteration: {}'.format(args.iteration))
     environment.add('# optimizer: {}'.format(args.optimizer))
+    environment.add('# loss function: {}'.format(args.loss_function))
     environment.add('')
     environment.save(str(save_dir / 'environment.txt'))
 

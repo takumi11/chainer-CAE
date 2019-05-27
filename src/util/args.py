@@ -19,6 +19,9 @@ def parser():
     parser.add_argument('--optimizer', default='adam',
                         help='using discriminator optimizer')
 
+    parser.add_argument('--loss_function', default='mse',
+                        help='using loss function')
+
     parser.add_argument('--cos_shift',
                         action='store_true',
                         help="use or not use cos_shift")
